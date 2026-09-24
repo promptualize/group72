@@ -481,11 +481,11 @@ body.intro-done .intro { transform: translateY(-101%); }
   gap: var(--s-2xl); align-items: center;
 }
 .principal__portrait { position: relative; margin: 0; }
-.portrait-ph {
-  aspect-ratio: 4 / 5; display: grid; place-items: center;
-  background: radial-gradient(72% 62% at 50% 34%, var(--navy-600), var(--navy-800));
+.portrait {
+  width: 100%; height: auto; aspect-ratio: 4 / 5;
+  object-fit: cover; object-position: 50% 18%;   /* keep the head off the top edge */
+  border-radius: 2px;
 }
-.portrait-ph__mark { width: 62%; height: auto; opacity: .92; }
 .caption-pill {
   position: absolute; left: var(--s-sm); bottom: var(--s-sm);
   display: inline-flex; align-items: center; gap: 8px;

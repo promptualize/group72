@@ -102,13 +102,15 @@
   if (reduce || !('IntersectionObserver' in window)) {
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   } else {
+    // Two thresholds give hysteresis: reveal once 12% is showing, and only
+    // re-arm once the element is completely gone. Without the gap, anything
+    // sitting near a viewport edge would flicker on every scroll tick.
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('is-in');
-        io.unobserve(e.target);
+        if (e.intersectionRatio >= 0.12) e.target.classList.add('is-in');
+        else if (e.intersectionRatio === 0) e.target.classList.remove('is-in');
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    }, { threshold: [0, 0.12], rootMargin: '0px 0px -7% 0px' });
     reveals.forEach(function (el, i) {
       el.style.setProperty('--reveal-delay', (i % 4) * 85 + 'ms');
       io.observe(el);
@@ -129,12 +131,16 @@
   }
   var counters = document.querySelectorAll('[data-count]');
   if ('IntersectionObserver' in window) {
-    var cio = new IntersectionObserver(function (es, o) {
+    var cio = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        countUp(e.target); o.unobserve(e.target);
+        if (e.intersectionRatio >= 0.6) {
+          if (!e.target.dataset.ran) { e.target.dataset.ran = '1'; countUp(e.target); }
+        } else if (e.intersectionRatio === 0) {
+          delete e.target.dataset.ran;      // re-arm for the next pass
+          e.target.textContent = '0';
+        }
       });
-    }, { threshold: 0.6 });
+    }, { threshold: [0, 0.6] });
     counters.forEach(function (el) { cio.observe(el); });
   } else {
     counters.forEach(countUp);
