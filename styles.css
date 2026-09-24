@@ -732,44 +732,41 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
 }
 
 
-/* ── Coverage carousel (mobile only) ───────────────────────────────────────
-   Desktop keeps the stacked offset rows. Under 700px the same list becomes a
-   snap carousel that auto-advances, since seven full-width rows is a lot of
-   scrolling on a phone. */
+/* ── Pillar carousel (mobile only) ─────────────────────────────────────────
+   Desktop keeps the 2x2 grid. Under 700px the four cards become a snap
+   carousel that auto-rotates, which suits four equal cards better than
+   stacking them into a 900px column. */
 
-.lines__dots { display: none; }
+.carousel-dots { display: none; }
 
 @media (max-width: 700px) {
-  .lines {
-    display: flex; gap: var(--s-sm);
+  .pillars {
+    display: flex; gap: var(--s-sm); border: 0;
     overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
     margin-inline: calc(var(--gutter) * -1);
     padding-inline: var(--gutter);
   }
-  .lines::-webkit-scrollbar { display: none; }
+  .pillars::-webkit-scrollbar { display: none; }
 
-  .lines li {
-    flex: 0 0 78%; scroll-snap-align: center;
-    display: grid; grid-template-columns: 1fr; gap: 6px;
-    padding: var(--s-md); border: 1px solid var(--rule); border-radius: 2px;
-    background: var(--wheat); text-align: center;
+  .pillar {
+    flex: 0 0 80%; scroll-snap-align: center;
+    border: 1px solid var(--rule-strong); border-radius: 2px;
+    padding: var(--s-lg) var(--s-md);
     transition: border-color var(--dur-fast);
   }
-  .lines li:nth-child(even) { padding-left: var(--s-md); }
-  .lines li:last-child { border-bottom: 1px solid var(--rule); }
-  .lines li:hover { padding-left: var(--s-md); }
-  .lines li.is-active { border-color: var(--rule-gold); }
-  .lines i { font-size: var(--type-micro); }
-  .lines h3 { font-size: var(--type-body); }
+  .pillar:nth-child(2n), .pillar:last-child { border: 1px solid var(--rule-strong); }
+  .pillar.is-active { border-color: var(--rule-gold); }
 
-  .lines__dots { display: flex; justify-content: center; gap: 2px; margin-top: var(--s-sm); }
-  .lines__dots button {
+  /* cards sit off-screen horizontally, so the scroll-reveal would never
+     fire for them. show them outright inside the carousel. */
+  .pillars [data-reveal] { opacity: 1; transform: none; }
+
+  .carousel-dots { display: flex; justify-content: center; gap: 2px; margin-top: var(--s-md); }
+  .carousel-dots button {
     width: 24px; height: 24px; padding: 8px;   /* 24px target, 8px dot */
     border: 0; background: var(--rule-strong); background-clip: content-box;
-    border-radius: 50%; cursor: pointer;
-    transition: background var(--dur-fast);
+    border-radius: 50%; cursor: pointer; transition: background var(--dur-fast);
   }
-  .lines__dots button[aria-selected="true"] { background: var(--gold-500); background-clip: content-box; }
+  .carousel-dots button[aria-selected="true"] { background: var(--gold-500); background-clip: content-box; }
 }
