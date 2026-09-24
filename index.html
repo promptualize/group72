@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group 72 Risk Advisors · Commercial Insurance for Contractors · Springfield, Missouri</title>
+<meta name="description" content="An independent commercial property and casualty agency for contractors and the trades across southwest Missouri. Rooted in faith. Built for what's ahead.">
+<meta name="theme-color" content="#EAE6DD">
+
+<meta property="og:title" content="Group 72 Risk Advisors">
+<meta property="og:description" content="Commercial insurance for the people who build. Springfield, Missouri.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://group72insurance.com/">
+
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="is-loading">
+
+<!-- ═══ LOAD SCREEN ═════════════════════════════════════════════════════════
+     Four pillars cycle through the ring, then resolve into the stacked
+     lockup, which grows to fill the screen. Wheat ground: the pillar icons
+     are navy-and-gold artwork drawn for light backgrounds, so on navy their
+     strokes vanish. If the assets are missing, site.js falls back to type. -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__stage">
+
+    <div class="intro__ring" id="introRing">
+      <img class="intro__glyph" src="assets/pillar_partner.png"  alt="" data-pillar="Partnering">
+      <img class="intro__glyph" src="assets/pillar_guide.png"    alt="" data-pillar="Guiding">
+      <img class="intro__glyph" src="assets/pillar_shepherd.png" alt="" data-pillar="Shepherding">
+      <img class="intro__glyph" src="assets/pillar_protect.png"  alt="" data-pillar="Protecting">
+    </div>
+
+    <p class="intro__label" id="introLabel"></p>
+
+    <!-- typeset fallback, only shown if the artwork is missing -->
+    <span class="intro__fallback" id="introFallback">
+      <b>GROUP</b><em>72</em>
+      <i>Risk Advisors</i>
+    </span>
+  </div>
+
+  <!-- centred on the viewport, not the stage, so it can grow past it -->
+  <img class="intro__lockup" id="introLockup" src="assets/G72_Logo_Secondary_Dark.png"
+       alt="Group 72 Risk Advisors" width="1100" height="784">
+</div>
+
+<!-- ═══ NAV ═════════════════════════════════════════════════════════════════ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Group 72 Risk Advisors, home">
+    <img src="assets/G72_Logo_FullColor_Dark.png" alt="Group 72 Risk Advisors" width="176" height="55">
+    <span class="brand__fallback"><b>GROUP</b><em>72</em><i>Risk Advisors</i></span>
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#coverage">Coverage</a>
+    <a href="#standard">Our Standard</a>
+    <a href="#seventytwo">The Name</a>
+    <a href="#jace">About</a>
+  </nav>
+
+  <a class="btn btn--navy nav__cta" href="#contact">
+    <span>Request a quote</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+  </a>
+
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobilenav" id="mobileNav" hidden>
+  <a href="#coverage">Coverage</a>
+  <a href="#standard">Our Standard</a>
+  <a href="#seventytwo">The Name</a>
+  <a href="#jace">About</a>
+  <a class="mobilenav__cta" href="#contact">Request a quote</a>
+</div>
+
+<main id="top">
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__wash" aria-hidden="true"></div>
+
+  <div class="hero__copy">
+    <h1 class="hero__h" data-load="2">
+      <span class="thin">Insurance for</span>
+      <span class="black">the people<br>who build.</span>
+    </h1>
+
+    <p class="hero__lead" data-load="3">
+      An independent agency for contractors and the trades across southwest
+      Missouri. Full carrier access with the service a captive used to give you,
+      from one agent who answers the phone.
+    </p>
+
+    <div class="hero__acts" data-load="4">
+      <a class="btn btn--navy" href="#contact">
+        <span>Request a quote</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn--quiet" href="#coverage"><span>What we cover</span></a>
+    </div>
+
+    <p class="hero__tag" data-load="5">Rooted in faith. Built for what's ahead.</p>
+  </div>
+
+  <aside class="hero__cards" data-load="5">
+    <figure class="hcard hcard--verse">
+      <span class="hcard__rule" aria-hidden="true"></span>
+      <blockquote>The harvest is plentiful, but the workers are few.</blockquote>
+      <figcaption>Luke 10:2</figcaption>
+    </figure>
+
+    <div class="hcard hcard--facts">
+      <dl>
+        <div><dt>Focus</dt><dd>Construction<br>and trades</dd></div>
+        <div><dt>Territory</dt><dd><b data-count="100">0</b> mi<br>from Springfield</dd></div>
+        <div><dt>In P&amp;C</dt><dd><b data-count="6">0</b> yrs<br>construction only</dd></div>
+        <div><dt>Licensed</dt><dd>MO, AR<br>OK, KS</dd></div>
+      </dl>
+    </div>
+  </aside>
+</section>
+
+<!-- ═══ COVERAGE ════════════════════════════════════════════════════════════ -->
+<section class="written" id="coverage">
+  <header class="written__head" data-reveal>
+    <h2 class="h2">Coverage</h2>
+    <p class="written__note">
+      Construction is the whole book, not a department inside it.
+    </p>
+  </header>
+
+  <ol class="lines">
+    <li data-reveal><i>01</i><div><h3>Excavation &amp; underground utility</h3><p>Grading, site prep, trenching, storm and sanitary, municipal bid work.</p></div></li>
+    <li data-reveal><i>02</i><div><h3>Concrete &amp; paving</h3><p>Structural, flatwork, drives, yards and asphalt.</p></div></li>
+    <li data-reveal><i>03</i><div><h3>Electrical</h3><p>Commercial and industrial, service and new construction.</p></div></li>
+    <li data-reveal><i>04</i><div><h3>HVAC &amp; mechanical</h3><p>Install, service and sheet metal.</p></div></li>
+    <li data-reveal><i>05</i><div><h3>Plumbing</h3><p>Commercial, service and underground.</p></div></li>
+    <li data-reveal><i>06</i><div><h3>Landscaping &amp; site work</h3><p>Commercial grounds, hardscape and irrigation.</p></div></li>
+    <li data-reveal><i>07</i><div><h3>Specialty trades</h3><p>Drywall, framing, masonry, carpentry and finish.</p></div></li>
+  </ol>
+
+  <div class="written__lines" data-reveal>
+    <h3 class="lines-head">Lines we place</h3>
+    <ul class="chips">
+      <li>General liability</li>
+      <li>Workers compensation</li>
+      <li>Commercial auto</li>
+      <li>Inland marine &amp; equipment</li>
+      <li>Commercial property</li>
+      <li>Umbrella &amp; excess</li>
+      <li>Builder's risk</li>
+      <li>Surety &amp; bid bonds</li>
+    </ul>
+    <p class="written__foot">
+      Surety writing opens within the first 90 days of launch. Life and
+      disability for owners and key employees is available now, and home, auto
+      and umbrella for the families behind the business.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ OUR STANDARD ════════════════════════════════════════════════════════ -->
+<section class="posture" id="standard">
+  <header class="posture__head" data-reveal>
+    <h2 class="h2">Our standard</h2>
+    <p class="posture__note">
+      Published, not promised. Every account, every year, no exceptions.
+    </p>
+  </header>
+
+  <ol class="cycle" data-reveal>
+    <li><b>Day 1</b><span>Bind and onboard</span></li>
+    <li><b>Day 15</b><span>Account executive follow-up</span></li>
+    <li><b>Day 60</b><span>Risk control review</span></li>
+    <li><b>Day 120</b><span>Mid-policy check-in</span></li>
+    <li><b>Day 180</b><span>Mid-year strategy review</span></li>
+    <li><b>Day 270</b><span>Renewal kickoff</span></li>
+    <li><b>Day 350</b><span>Renewal strategy meeting</span></li>
+  </ol>
+
+  <p class="promise" data-reveal>
+    Certificates go out within <b>four business hours</b>, measured. Every
+    coverage decision is made by a licensed producer whose name you already
+    know, and that name is on the next section.
+  </p>
+
+  <div class="pillars">
+    <article class="pillar" data-reveal>
+      <img src="assets/pillar_partner.png" alt="" class="pillar__ico">
+      <span class="pillar__i">Partnering</span><p>Walking beside you, two by two.</p>
+    </article>
+    <article class="pillar" data-reveal>
+      <img src="assets/pillar_guide.png" alt="" class="pillar__ico">
+      <span class="pillar__i">Guiding</span><p>Clear direction through uncertainty.</p>
+    </article>
+    <article class="pillar" data-reveal>
+      <img src="assets/pillar_shepherd.png" alt="" class="pillar__ico">
+      <span class="pillar__i">Shepherding</span><p>Watching over what you have built.</p>
+    </article>
+    <article class="pillar" data-reveal>
+      <img src="assets/pillar_protect.png" alt="" class="pillar__ico">
+      <span class="pillar__i">Protecting</span><p>Safeguarding what matters most.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ THE NAME · navy band ════════════════════════════════════════════════ -->
+<section class="field" id="seventytwo">
+  <div class="sent" data-reveal>
+    <!-- Geometry lifted from Group72_BrandGuide_Dots.png (99.2% IoU verified),
+         redrawn as vector only so the dots can animate individually.
+         Navy dots are knocked out to wheat here: the source icon is drawn
+         for light grounds and #0E2445 is invisible on the #0D2446 band. -->
+    <svg viewBox="0 0 2335 2329" role="img" aria-label="Seventy-two sent out two by two">
+      <circle class="d d--0" cx="1167.7" cy="509.2"  r="169"/>
+      <circle class="d d--1" cx="678.8"  cy="937.7"  r="169"/>
+      <circle class="d d--1" cx="1167.7" cy="937.7"  r="169"/>
+      <circle class="d d--2" cx="678.8"  cy="1366.1" r="169"/>
+      <circle class="d d--2" cx="1167.7" cy="1366.1" r="169"/>
+      <circle class="d d--4 d--gold" cx="1656.7" cy="1366.1" r="169"/>
+      <circle class="d d--3" cx="678.8"  cy="1794.5" r="169"/>
+      <circle class="d d--3" cx="1167.8" cy="1794.5" r="169"/>
+      <circle class="d d--4 d--gold" cx="1656.7" cy="1794.5" r="169"/>
+    </svg>
+  </div>
+
+  <div class="field__lead" data-reveal>
+    <h2 class="h2">Seventy&#8209;two,<br>sent two by two.</h2>
+  </div>
+
+  <div class="field__body" data-reveal>
+    <p class="big">
+      The name comes from Luke 10. Seventy-two were sent out ahead of him, in
+      pairs, into a harvest with far too few workers to bring it in.
+    </p>
+    <p>
+      That is the posture here. You do not walk the job alone, and neither do we.
+      An agent goes out ahead of you, reads the ground, and tells you what is
+      coming before it arrives.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ JACE ════════════════════════════════════════════════════════════════ -->
+<section class="principal" id="jace">
+  <figure class="principal__portrait" data-reveal>
+    <!-- TODO: swap in a real photograph of Jace. -->
+    <div class="portrait-ph" role="img" aria-label="Portrait of Jace Duvall, forthcoming">
+      <img src="assets/G72_Logo_Icon_Light.png" alt="" class="portrait-ph__mark">
+    </div>
+    <figcaption class="caption-pill"><span class="num">.01</span> Republic, Missouri</figcaption>
+  </figure>
+
+  <div class="principal__copy" data-reveal>
+    <h2 class="h2">Jace Duvall</h2>
+    <p class="principal__role">Principal producer and agent in charge</p>
+    <p>
+      Six years in commercial property and casualty, all of it in construction,
+      split between a captive carrier and a national brokerage. He has been
+      writing the same trades Group 72 serves since 2020.
+    </p>
+    <p>
+      Licensed in Missouri, Arkansas, Oklahoma and Kansas for property and
+      casualty, and in Missouri for life and health. CIC and CRIS coursework
+      underway.
+    </p>
+    <a class="link-arrow" href="#contact">
+      <span>Talk to Jace</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ MARKETS ═════════════════════════════════════════════════════════════ -->
+<section class="markets" data-reveal>
+  <p class="markets__note">
+    Roughly a dozen carriers on day one through network membership, with direct
+    appointments in progress. Named markets published once each appointment is
+    executed.
+  </p>
+</section>
+
+<!-- ═══ CONTACT · navy band ═════════════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="contact__copy" data-reveal>
+    <h2 class="h2">Tell us<br>what you build.</h2>
+    <p class="contact__lead">
+      Send your trade and when your policies renew. You will hear back within
+      one business day, from Jace, every time.
+    </p>
+
+    <ul class="contact__direct">
+      <li><span>Email</span><a href="mailto:info@group72insurance.com">info@group72insurance.com</a></li>
+      <li><span>Phone</span><a href="tel:+14178612150">(417) 861-2150</a></li>
+      <li><span>Serving</span><p>Greene, Christian, Webster, Lawrence, Polk,<br>Dallas, Stone and Taney counties</p></li>
+    </ul>
+  </div>
+
+  <form class="form" id="leadForm" novalidate data-reveal>
+    <div class="form__row">
+      <label class="ff"><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label class="ff"><span>Company</span><input type="text" name="company" autocomplete="organization"></label>
+    </div>
+
+    <div class="form__row">
+      <label class="ff"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+      <label class="ff"><span>Phone</span><input type="tel" name="phone" autocomplete="tel"></label>
+    </div>
+
+    <label class="ff">
+      <span>Trade</span>
+      <select name="trade">
+        <option value="">Select a trade</option>
+        <option>Excavation and underground utility</option>
+        <option>Concrete and paving</option>
+        <option>Electrical</option>
+        <option>HVAC and mechanical</option>
+        <option>Plumbing</option>
+        <option>Landscaping and site work</option>
+        <option>Specialty trade</option>
+        <option>General contractor</option>
+        <option>Personal lines only</option>
+        <option>Something else</option>
+      </select>
+    </label>
+
+    <label class="ff">
+      <span>Renewal month</span>
+      <input type="text" name="renewal" placeholder="Month, or not sure">
+    </label>
+
+    <label class="ff">
+      <span>Anything we should know</span>
+      <textarea name="message" rows="4"></textarea>
+    </label>
+
+    <button class="btn btn--gold btn--full" type="submit">
+      <span>Send it over</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+    </button>
+
+    <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════════════════ -->
+<footer class="foot">
+
+  <div class="foot__grid">
+    <div class="foot__brand">
+      <a class="brand brand--foot" href="#top">
+        <img src="assets/G72_Logo_FullColor_Light.png" alt="Group 72 Risk Advisors" width="196" height="61">
+        <span class="brand__fallback"><b>GROUP</b><em>72</em><i>Risk Advisors</i></span>
+      </a>
+      <p class="foot__tag">Rooted in faith. Built for what's ahead.</p>
+    </div>
+
+    <div class="foot__col">
+      <h4>Agency</h4>
+      <a href="#coverage">Coverage</a>
+      <a href="#standard">Our Standard</a>
+      <a href="#seventytwo">The Name</a>
+      <a href="#jace">About</a>
+    </div>
+
+    <div class="foot__col">
+      <h4>Reach us</h4>
+      <a href="mailto:info@group72insurance.com">info@group72insurance.com</a>
+      <a href="tel:+14178612150">(417) 861-2150</a>
+      <p>Republic, Missouri</p>
+    </div>
+
+    <div class="foot__col">
+      <p class="foot__verse">The harvest is plentiful,<br>but the workers are few.</p>
+      <p class="foot__cite">Luke 10:2</p>
+    </div>
+  </div>
+
+  <div class="foot__legal">
+    <p>&copy; <span id="yr">2026</span> Group 72 Risk Advisors, LLC. Missouri limited liability company.</p>
+    <p>Property &amp; casualty licensed in Missouri, Arkansas, Oklahoma and Kansas.</p>
+  </div>
+
+  <a class="site-by" href="https://promptualize.com" target="_blank" rel="noopener" aria-label="Site by Promptualize">
+    <span>Site by</span>
+    <img src="assets/promptualize_p_white.png" alt="Promptualize" />
+  </a>
+
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
