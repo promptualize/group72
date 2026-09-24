@@ -140,7 +140,68 @@
     counters.forEach(countUp);
   }
 
-  /* ── 4. Nav ────────────────────────────────────────────────────────────── */
+  /* ── 4. Coverage carousel (mobile) ─────────────────────────────────────
+     The list is a snap carousel under 700px. Auto-advances, and stops for
+     good the moment the visitor takes over. */
+
+  var lines = document.querySelector('.lines');
+  var dotsBox = document.getElementById('linesDots');
+  var mq = window.matchMedia('(max-width: 700px)');
+
+  if (lines && dotsBox) {
+    var cards = [].slice.call(lines.children);
+    var timer = null, userTook = false;
+
+    cards.forEach(function (card, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Show ' + (card.querySelector('h3') || {}).textContent);
+      b.addEventListener('click', function () { userTook = true; stop(); goTo(i); });
+      dotsBox.appendChild(b);
+    });
+    var dots = [].slice.call(dotsBox.children);
+
+    function mark(i) {
+      dots.forEach(function (d, n) { d.setAttribute('aria-selected', String(n === i)); });
+      cards.forEach(function (c, n) { c.classList.toggle('is-active', n === i); });
+    }
+    function current() {
+      var mid = lines.scrollLeft + lines.clientWidth / 2;
+      var best = 0, bestD = Infinity;
+      cards.forEach(function (c, i) {
+        var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    }
+    function goTo(i) {
+      var c = cards[i];
+      lines.scrollTo({ left: c.offsetLeft - (lines.clientWidth - c.offsetWidth) / 2, behavior: 'smooth' });
+      mark(i);
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() {
+      if (timer || userTook || reduce || !mq.matches) return;
+      timer = setInterval(function () { goTo((current() + 1) % cards.length); }, 4200);
+    }
+
+    lines.addEventListener('scroll', function () { mark(current()); }, { passive: true });
+    ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) {
+      lines.addEventListener(ev, function () { userTook = true; stop(); }, { passive: true });
+    });
+    mq.addEventListener('change', function () { stop(); start(); mark(current()); });
+
+    mark(0);
+    // only run while the section is on screen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+      }, { threshold: 0.25 }).observe(lines);
+    } else { start(); }
+  }
+
+  /* ── 5. Nav ────────────────────────────────────────────────────────────── */
 
   var nav = document.getElementById('nav');
   var burger = document.getElementById('burger');
@@ -178,7 +239,7 @@
     });
   }
 
-  /* ── 5. Form ───────────────────────────────────────────────────────────── */
+  /* ── 6. Form ───────────────────────────────────────────────────────────── */
 
   var form = document.getElementById('leadForm');
   var status = document.getElementById('formStatus');
@@ -229,7 +290,7 @@
     });
   }
 
-  /* ── 6. Housekeeping ───────────────────────────────────────────────────── */
+  /* ── 7. Housekeeping ───────────────────────────────────────────────────── */
 
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
