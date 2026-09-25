@@ -50,7 +50,9 @@
   --type-display: clamp(2.5rem, 1rem + 4.4vw, 4.5rem);
   --type-mega:    clamp(4.5rem, 0.5rem + 17vw, 17rem);
 
-  --lead-tight: 0.92; --lead-snug: 1.06; --lead-body: 1.62;
+  /* 0.92 put the descender of "p" in people 6.1px into the ascenders of
+     "build." below it. Measured ink bounds clear at 1.05; 1.1 leaves room. */
+  --lead-tight: 1.1; --lead-snug: 1.06; --lead-body: 1.62;
   /* guide 06 sets display tracking at +10. the old -0.045em collided the
      "pl" in people and the "il" in build at 600 weight. */
   --track-mega: 0.01em; --track-tight: -0.03em;
