@@ -15,7 +15,7 @@
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -54,7 +54,8 @@
 <!-- ═══ NAV ═════════════════════════════════════════════════════════════════ -->
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="Group 72 Risk Advisors, home">
-    <img src="assets/G72_Logo_FullColor_Dark.png" alt="Group 72 Risk Advisors" width="176" height="55">
+    <img class="brand__dark" src="assets/G72_Logo_FullColor_Dark.png" alt="Group 72 Risk Advisors" width="176" height="55">
+    <img class="brand__light" src="assets/G72_Logo_FullColor_Light.png" alt="" width="176" height="55">
     <span class="brand__fallback"><b>GROUP</b><em>72</em><i>Risk Advisors</i></span>
   </a>
 
@@ -87,12 +88,15 @@
 
 <!-- ═══ HERO ════════════════════════════════════════════════════════════════ -->
 <section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <img src="assets/hero_dirtroad.jpg" alt="" width="1344" height="768">
+  </div>
   <div class="hero__wash" aria-hidden="true"></div>
 
   <div class="hero__copy">
     <h1 class="hero__h" data-load="2">
-      <span class="thin">Insurance for</span>
-      <span class="black">the people<br>who build.</span>
+      <span class="thin"><span class="tw">Insurance for</span></span>
+      <span class="black"><span class="w">the</span> <span class="w">people</span><br><span class="w">who</span> <span class="w">build.</span></span>
     </h1>
 
     <p class="hero__lead" data-load="3">
@@ -123,7 +127,7 @@
       <dl>
         <div><dt>Focus</dt><dd>Construction<br>and trades</dd></div>
         <div><dt>Territory</dt><dd><b data-count="100">0</b> mi<br>from Springfield</dd></div>
-        <div><dt>In P&amp;C</dt><dd><b data-count="6">0</b> yrs<br>construction only</dd></div>
+        <div><dt>In P&amp;C</dt><dd><b data-count="6">0</b> yrs<br>in the trades</dd></div>
         <div><dt>Licensed</dt><dd>MO, AR<br>OK, KS</dd></div>
       </dl>
     </div>
@@ -134,9 +138,6 @@
 <section class="written" id="coverage">
   <header class="written__head" data-reveal>
     <h2 class="h2">Coverage</h2>
-    <p class="written__note">
-      Construction is the whole book, not a department inside it.
-    </p>
   </header>
 
   <ol class="lines">
@@ -151,20 +152,16 @@
 
   <div class="written__lines" data-reveal>
     <h3 class="lines-head">Lines We Place</h3>
-    <ul class="chips">
-      <li>General Liability</li>
-      <li>Workers Compensation</li>
-      <li>Commercial Auto</li>
-      <li>Inland Marine &amp; Equipment</li>
-      <li>Commercial Property</li>
-      <li>Umbrella &amp; Excess</li>
-      <li>Builder's Risk</li>
-      <li>Surety &amp; Bid Bonds</li>
+    <ul class="script" data-reveal>
+      <li><span>General Liability</span></li>
+      <li><span>Workers Compensation</span></li>
+      <li><span>Commercial Auto</span></li>
+      <li><span>Inland Marine &amp; Equipment</span></li>
+      <li><span>Commercial Property</span></li>
+      <li><span>Umbrella &amp; Excess</span></li>
+      <li><span>Builder's Risk</span></li>
+      <li><span>Surety &amp; Bid Bonds</span></li>
     </ul>
-    <p class="written__foot">
-      Surety opens within 90 days of launch. Life, disability and personal
-      lines available now.
-    </p>
   </div>
 </section>
 
@@ -194,6 +191,10 @@
   </p>
 
   <div class="pillars">
+    <article class="pillar pillar--wide" data-reveal>
+      <img src="assets/pillar_luke10.png" alt="" class="pillar__ico">
+      <span class="pillar__i">Luke 10</span><p>The foundation of our mission. Go prepared, go together, serve well.</p>
+    </article>
     <article class="pillar" data-reveal>
       <img src="assets/pillar_partner.png" alt="" class="pillar__ico">
       <span class="pillar__i">Partnering</span><p>Walking beside you, two by two.</p>
@@ -254,7 +255,7 @@
 <!-- ═══ JACE ════════════════════════════════════════════════════════════════ -->
 <section class="principal" id="jace">
   <figure class="principal__portrait" data-reveal>
-    <img class="portrait" src="assets/jace.jpg" width="900" height="1125"
+    <img class="portrait" src="assets/jace.jpg" width="887" height="895"
          alt="Jace Duvall, Principal Producer and Founding Agent of Group 72 Risk Advisors">
   </figure>
 
@@ -262,8 +263,9 @@
     <h2 class="h2">Jace Duvall</h2>
     <p class="principal__role">Principal Producer / Founding Agent</p>
     <p>
-      Six years in commercial property and casualty, all of it in construction,
-      split between a captive carrier and a national brokerage. He has been
+      Six years in commercial property and casualty, with a heavy focus in
+      construction and trades, split between a captive carrier and a national
+      brokerage. He has been
       writing the same trades Group 72 serves since 2020.
     </p>
     <p>
@@ -343,11 +345,11 @@
 
   <div class="foot__grid">
     <div class="foot__brand">
-      <a class="brand brand--foot" href="#top">
-        <img src="assets/G72_Logo_FullColor_Dark.png" alt="Group 72 Risk Advisors" width="196" height="61">
+      <a class="brand brand--foot" href="#top" aria-label="Group 72 Risk Advisors">
+        <img src="assets/G72_Logo_Icon_Dark.png" alt="Group 72 Risk Advisors" width="520" height="565">
         <span class="brand__fallback"><b>GROUP</b><em>72</em><i>Risk Advisors</i></span>
       </a>
-      <p class="foot__tag">Rooted in faith. Built for what's ahead.</p>
+      <p class="foot__tag">Rooted in faith.<br>Built for what's ahead.</p>
     </div>
 
     <div class="foot__col">

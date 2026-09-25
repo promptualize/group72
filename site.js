@@ -38,7 +38,44 @@
     finished = true;
     body.classList.remove('is-loading');
     body.classList.add('intro-done');
+    runHeadline();
     setTimeout(function () { if (intro && intro.parentNode) intro.remove(); }, 1400);
+  }
+
+  /* ── 1a. Headline build ────────────────────────────────────────────────
+     "Insurance for" types itself, then the black words land one at a time.
+     Staged synchronously so nothing flashes before the intro clears. The
+     full text lives in the HTML, so with JS off the headline just reads. */
+
+  var tw    = document.querySelector('.hero__h .tw');
+  var black = document.querySelector('.hero__h .black');
+  var words = black ? [].slice.call(black.querySelectorAll('.w')) : [];
+  var typeText = tw ? tw.textContent : '';
+
+  if (!reduce && tw && words.length) {
+    tw.textContent = '';
+    black.classList.add('is-staged');
+  }
+
+  function runHeadline() {
+    if (reduce || !tw || !words.length) return;
+
+    var i = 0;
+    tw.classList.add('is-typing');
+
+    function type() {
+      tw.textContent = typeText.slice(0, ++i);
+      if (i < typeText.length) {
+        // slight jitter keeps it off a metronome
+        setTimeout(type, 88 + Math.random() * 46);
+      } else {
+        setTimeout(function () { tw.classList.remove('is-typing'); }, 620);
+        words.forEach(function (w, n) {
+          setTimeout(function () { w.classList.add('is-set'); }, 300 + n * 330);
+        });
+      }
+    }
+    setTimeout(type, 430);
   }
 
   // Hard stop. Whatever happens above, the page appears.
@@ -114,6 +151,47 @@
     reveals.forEach(function (el, i) {
       el.style.setProperty('--reveal-delay', (i % 4) * 85 + 'ms');
       io.observe(el);
+    });
+  }
+
+  /* ── 2a. Coverage rows, active on touch ────────────────────────────────
+     Desktop gilds and indents a row on hover. Touch has no hover, so the
+     same treatment follows scroll position: a narrow band across the middle
+     of the viewport marks whichever row is passing through it. */
+
+  var rows = document.querySelectorAll('.lines li');
+  var mqRows = window.matchMedia('(max-width: 700px)');
+
+  if (rows.length && !reduce && 'IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        e.target.classList.toggle('is-hot', e.isIntersecting && mqRows.matches);
+      });
+    }, { rootMargin: '-49% 0px -49% 0px', threshold: 0 });
+    rows.forEach(function (li) { rio.observe(li); });
+
+    // leaving mobile clears any row left lit
+    mqRows.addEventListener('change', function () {
+      if (!mqRows.matches) {
+        rows.forEach(function (li) { li.classList.remove('is-hot'); });
+      }
+    });
+  }
+
+  /* ── 2b. Lines we place ────────────────────────────────────────────────
+     Each line is written at a rate drawn from its own length, so a long
+     phrase takes longer than a short one the way a hand would. Lines
+     overlap slightly so eight of them do not take eight beats. */
+
+  var script = document.querySelector('.script');
+  if (script && !reduce) {
+    var at = 0;
+    [].forEach.call(script.querySelectorAll('li'), function (li) {
+      var chars = li.textContent.trim().length;
+      var t = Math.max(0.36, chars * 0.032);
+      li.style.setProperty('--t', t.toFixed(2) + 's');
+      li.style.setProperty('--d', at.toFixed(2) + 's');
+      at += t * 0.52;
     });
   }
 
