@@ -51,7 +51,9 @@
   --type-mega:    clamp(4.5rem, 0.5rem + 17vw, 17rem);
 
   --lead-tight: 0.92; --lead-snug: 1.06; --lead-body: 1.62;
-  --track-mega: -0.045em; --track-tight: -0.03em;
+  /* guide 06 sets display tracking at +10. the old -0.045em collided the
+     "pl" in people and the "il" in build at 600 weight. */
+  --track-mega: 0.01em; --track-tight: -0.03em;
   --track-wide: 0.18em;   --track-wider: 0.34em;
 
   --s-2xs: 8px; --s-xs: 12px; --s-sm: 16px; --s-md: 24px;
@@ -307,8 +309,7 @@ body.intro-done .intro { transform: translateY(-101%); }
 .hero {
   position: relative; min-height: min(100svh, 820px);
   padding: calc(var(--s-2xl) + 34px) var(--gutter) var(--s-2xl);
-  display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(0, .78fr);
-  align-items: center; gap: var(--s-xl); overflow: hidden;
+  display: grid; align-items: center; gap: var(--s-xl); overflow: hidden;
 }
 /* Photography per guide section 08: golden-hour land, with a Navy overlay
    in the 40 to 60 band so copy stays readable. Weighted heavier on the
@@ -345,7 +346,7 @@ body.intro-done .intro { transform: translateY(-101%); }
 .hero .btn--navy:hover { background: color-mix(in oklch, var(--gold-500), black 12%); }
 .hero .btn--quiet { color: var(--wheat); border-color: color-mix(in oklch, var(--wheat) 42%, transparent); }
 .hero .btn--quiet:hover { border-color: var(--wheat); background: color-mix(in oklch, var(--wheat) 10%, transparent); }
-.hero__copy { position: relative; z-index: 1; }
+.hero__copy { position: relative; z-index: 1; max-width: 46ch; }
 .hero__h { margin: var(--s-md) 0; display: grid; }
 /* full Wheat, not a tint: at 82% this measured 2.75 over the photograph,
    under the 3.0 large-text floor. The 300 against 600 weight is what
@@ -379,55 +380,6 @@ body.intro-done .intro { transform: translateY(-101%); }
 /* Tagline, per guide section 06: SemiBold, +250 tracking, all caps, Orange.
    Orange is reserved for this and for calls to action, nothing else. */
 
-.hero__cards { position: relative; z-index: 1; display: grid; gap: var(--s-sm);
-               justify-self: end; width: min(100%, 420px); }
-.hcard {
-  margin: 0; padding: var(--s-lg); background: var(--paper);
-  border: 1px solid var(--rule); border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(13,36,70,.04), 0 18px 40px -26px rgba(13,36,70,.28);
-  transition: transform var(--dur-mid) var(--ease-out), border-color var(--dur-mid), box-shadow var(--dur-mid);
-}
-.hcard:hover { border-color: var(--rule-gold); box-shadow: 0 1px 2px rgba(13,36,70,.05), 0 26px 52px -26px rgba(13,36,70,.34); }
-/* Three facts, read as a ruled spec list rather than a grid of labels.
-   Each row is divided by a hairline Tan rule (guide 07) and arrives on its
-   own beat after the card lands. */
-.hcard--facts { padding: var(--s-lg) var(--s-lg) calc(var(--s-lg) - 4px); }
-.hcard--facts:hover { transform: translateY(-4px); }
-
-/* Triple Slash. Navy, Tan, Orange, leaning at the angle of the symbol.
-   Draws upward in sequence once the card is in. */
-.slash { display: flex; gap: 6px; margin-bottom: var(--s-md); }
-.slash i {
-  width: 3px; height: 22px; display: block;
-  transform: skewX(-18deg) scaleY(0); transform-origin: bottom;
-  transition: transform .5s var(--ease-out);
-}
-.slash i:nth-child(1) { background: var(--navy-700); }
-.slash i:nth-child(2) { background: var(--gold-500); }
-.slash i:nth-child(3) { background: var(--orange); }
-body.intro-done .slash i { transform: skewX(-18deg) scaleY(1); }
-body.intro-done .slash i:nth-child(1) { transition-delay: 640ms; }
-body.intro-done .slash i:nth-child(2) { transition-delay: 720ms; }
-body.intro-done .slash i:nth-child(3) { transition-delay: 800ms; }
-
-.hcard--facts dl { display: grid; grid-template-columns: 1fr; }
-.hcard--facts dl > div { padding: var(--s-sm) 0; border-top: 1px solid var(--rule-gold); }
-.hcard--facts dl > div:first-child { border-top: 0; padding-top: 0; }
-.hcard--facts dt {
-  margin-bottom: 5px; font-size: var(--type-micro); font-weight: var(--w-semi);
-  letter-spacing: var(--track-wider); text-transform: uppercase; color: var(--gold-700);
-}
-.hcard--facts dd {
-  margin: 0; font-size: var(--type-body); font-weight: var(--w-light);
-  line-height: 1.38; color: var(--ink);
-  text-wrap: balance;   /* stops the four-state line stranding "Kansas" */
-}
-/* slash separators inside the territory line, not punctuation */
-.hcard--facts dd i {
-  font-style: normal; color: var(--gold-500);
-  padding: 0 2px; transform: skewX(-18deg); display: inline-block;
-}
-.hcard--facts b { font-size: var(--type-h3); font-weight: var(--w-semi); color: var(--gold-500); font-variant-numeric: tabular-nums; }
 
 /* ══ COVERAGE ══════════════════════════════════════════════════════════════ */
 
@@ -672,9 +624,6 @@ body.intro-done [data-load="2"] { transition-delay: 210ms; }
 body.intro-done [data-load="3"] { transition-delay: 320ms; }
 body.intro-done [data-load="4"] { transition-delay: 420ms; }
 body.intro-done [data-load="5"] { transition-delay: 520ms; }
-body.intro-done [data-load="6"] { transition-delay: 660ms; }
-body.intro-done [data-load="7"] { transition-delay: 760ms; }
-body.intro-done [data-load="8"] { transition-delay: 860ms; }
 
 /* ── Studio credit ────────────────────────────────────────────────────────
    Lifted verbatim from PPM_rebuildrepo/styles.css so the mark is consistent
@@ -736,8 +685,6 @@ body.intro-done [data-load="8"] { transition-delay: 860ms; }
 @media (max-width: 1080px) {
   .hero { grid-template-columns: 1fr; gap: var(--s-xl); align-content: center; }
   .hero__copy { max-width: 34ch; }
-  /* hero stacks here, so the single card runs the full column */
-  .hero__cards { justify-self: stretch; width: auto; max-width: 480px; }
 
   .written { grid-template-columns: 1fr; }
   .written__head { position: static; }
@@ -788,7 +735,6 @@ body.intro-done [data-load="8"] { transition-delay: 860ms; }
 
   .hero__copy { max-width: none; }
   .hero__h .black { font-size: clamp(2.4rem, 11vw, 3.4rem); max-width: none; }
-  .hero__cards { max-width: none; }
 
   .written, .posture, .principal, .contact { padding-block: var(--s-xl); }
   .lines li { grid-template-columns: 3rem minmax(0, 1fr); gap: var(--s-sm); position: relative; }
@@ -866,9 +812,6 @@ body.intro-done [data-load="8"] { transition-delay: 860ms; }
   .cycle__dot { top: 4px; left: calc(var(--s-md) * -1 - 5px); }
 
   /* Cards centre on mobile; running text stays left so it is still readable. */
-  .hcard { text-align: center; }
-  .hcard--facts dl { justify-items: center; }
-  .slash { justify-content: center; }
   .pillar { text-align: center; }
   .pillar__ico { margin-left: auto; margin-right: auto; }
   .sent { margin-left: auto; margin-right: auto; }
