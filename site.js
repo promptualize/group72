@@ -195,36 +195,7 @@
     });
   }
 
-  /* ── 3. Counters ───────────────────────────────────────────────────────── */
-
-  function countUp(el) {
-    var target = parseInt(el.dataset.count, 10) || 0;
-    if (reduce) { el.textContent = target; return; }
-    var dur = 1250, t0 = performance.now();
-    (function tick(t) {
-      var p = Math.min((t - t0) / dur, 1);
-      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(tick);
-    })(t0);
-  }
-  var counters = document.querySelectorAll('[data-count]');
-  if ('IntersectionObserver' in window) {
-    var cio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.intersectionRatio >= 0.6) {
-          if (!e.target.dataset.ran) { e.target.dataset.ran = '1'; countUp(e.target); }
-        } else if (e.intersectionRatio === 0) {
-          delete e.target.dataset.ran;      // re-arm for the next pass
-          e.target.textContent = '0';
-        }
-      });
-    }, { threshold: [0, 0.6] });
-    counters.forEach(function (el) { cio.observe(el); });
-  } else {
-    counters.forEach(countUp);
-  }
-
-  /* ── 4. Pillar carousel (mobile) ───────────────────────────────────────
+  /* ── 3. Pillar carousel (mobile) ───────────────────────────────────────
      The four cards become a snap carousel under 700px. Auto-rotates, and
      stops for good the moment the visitor takes over. */
 
@@ -287,7 +258,7 @@
 
   carousel('.pillars', 'pillarDots', 'Pillar');
 
-  /* ── 5. Nav ────────────────────────────────────────────────────────────── */
+  /* ── 4. Nav ────────────────────────────────────────────────────────────── */
 
   var nav = document.getElementById('nav');
   var burger = document.getElementById('burger');
@@ -325,7 +296,7 @@
     });
   }
 
-  /* ── 6. Form ───────────────────────────────────────────────────────────── */
+  /* ── 5. Form ───────────────────────────────────────────────────────────── */
 
   var form = document.getElementById('leadForm');
   var status = document.getElementById('formStatus');
@@ -376,13 +347,13 @@
     });
   }
 
-  /* ── 7. Housekeeping ───────────────────────────────────────────────────── */
+  /* ── 6. Housekeeping ───────────────────────────────────────────────────── */
 
   var yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  // Pillar icons and the portrait mark hide themselves if not yet dropped in.
-  document.querySelectorAll('.pillar__ico, .portrait-ph__mark').forEach(function (im) {
+  // Pillar icons hide themselves if the artwork is not in /assets.
+  document.querySelectorAll('.pillar__ico').forEach(function (im) {
     var hide = function () { im.style.display = 'none'; };
     im.addEventListener('error', hide);
     if (im.complete && im.naturalWidth === 0) hide();

@@ -379,7 +379,8 @@ body.intro-done .intro { transform: translateY(-101%); }
 /* Tagline, per guide section 06: SemiBold, +250 tracking, all caps, Orange.
    Orange is reserved for this and for calls to action, nothing else. */
 
-.hero__cards { position: relative; z-index: 1; display: grid; gap: var(--s-sm); }
+.hero__cards { position: relative; z-index: 1; display: grid; gap: var(--s-sm);
+               justify-self: end; width: min(100%, 420px); }
 .hcard {
   margin: 0; padding: var(--s-lg); background: var(--paper);
   border: 1px solid var(--rule); border-radius: 2px;
@@ -387,13 +388,45 @@ body.intro-done .intro { transform: translateY(-101%); }
   transition: transform var(--dur-mid) var(--ease-out), border-color var(--dur-mid), box-shadow var(--dur-mid);
 }
 .hcard:hover { border-color: var(--rule-gold); box-shadow: 0 1px 2px rgba(13,36,70,.05), 0 26px 52px -26px rgba(13,36,70,.34); }
-.hcard--facts { transform: translateX(clamp(0px, 1.6vw, 22px)); }
-.hcard--facts:hover { transform: translateX(clamp(0px, 1.6vw, 22px)) rotate(1.2deg); }
-/* three facts now, not four: a single column reads as a spec list and
-   avoids the orphan cell a 2-up grid would leave. */
-.hcard--facts dl { display: grid; grid-template-columns: 1fr; gap: var(--s-md); }
-.hcard--facts dt { margin-bottom: 3px; font-size: var(--type-micro); letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-faint); }
-.hcard--facts dd { margin: 0; font-size: var(--type-sm); line-height: 1.32; }
+/* Three facts, read as a ruled spec list rather than a grid of labels.
+   Each row is divided by a hairline Tan rule (guide 07) and arrives on its
+   own beat after the card lands. */
+.hcard--facts { padding: var(--s-lg) var(--s-lg) calc(var(--s-lg) - 4px); }
+.hcard--facts:hover { transform: translateY(-4px); }
+
+/* Triple Slash. Navy, Tan, Orange, leaning at the angle of the symbol.
+   Draws upward in sequence once the card is in. */
+.slash { display: flex; gap: 6px; margin-bottom: var(--s-md); }
+.slash i {
+  width: 3px; height: 22px; display: block;
+  transform: skewX(-18deg) scaleY(0); transform-origin: bottom;
+  transition: transform .5s var(--ease-out);
+}
+.slash i:nth-child(1) { background: var(--navy-700); }
+.slash i:nth-child(2) { background: var(--gold-500); }
+.slash i:nth-child(3) { background: var(--orange); }
+body.intro-done .slash i { transform: skewX(-18deg) scaleY(1); }
+body.intro-done .slash i:nth-child(1) { transition-delay: 640ms; }
+body.intro-done .slash i:nth-child(2) { transition-delay: 720ms; }
+body.intro-done .slash i:nth-child(3) { transition-delay: 800ms; }
+
+.hcard--facts dl { display: grid; grid-template-columns: 1fr; }
+.hcard--facts dl > div { padding: var(--s-sm) 0; border-top: 1px solid var(--rule-gold); }
+.hcard--facts dl > div:first-child { border-top: 0; padding-top: 0; }
+.hcard--facts dt {
+  margin-bottom: 5px; font-size: var(--type-micro); font-weight: var(--w-semi);
+  letter-spacing: var(--track-wider); text-transform: uppercase; color: var(--gold-700);
+}
+.hcard--facts dd {
+  margin: 0; font-size: var(--type-body); font-weight: var(--w-light);
+  line-height: 1.38; color: var(--ink);
+  text-wrap: balance;   /* stops the four-state line stranding "Kansas" */
+}
+/* slash separators inside the territory line, not punctuation */
+.hcard--facts dd i {
+  font-style: normal; color: var(--gold-500);
+  padding: 0 2px; transform: skewX(-18deg); display: inline-block;
+}
 .hcard--facts b { font-size: var(--type-h3); font-weight: var(--w-semi); color: var(--gold-500); font-variant-numeric: tabular-nums; }
 
 /* ══ COVERAGE ══════════════════════════════════════════════════════════════ */
@@ -639,6 +672,9 @@ body.intro-done [data-load="2"] { transition-delay: 210ms; }
 body.intro-done [data-load="3"] { transition-delay: 320ms; }
 body.intro-done [data-load="4"] { transition-delay: 420ms; }
 body.intro-done [data-load="5"] { transition-delay: 520ms; }
+body.intro-done [data-load="6"] { transition-delay: 660ms; }
+body.intro-done [data-load="7"] { transition-delay: 760ms; }
+body.intro-done [data-load="8"] { transition-delay: 860ms; }
 
 /* ── Studio credit ────────────────────────────────────────────────────────
    Lifted verbatim from PPM_rebuildrepo/styles.css so the mark is consistent
@@ -700,8 +736,8 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
 @media (max-width: 1080px) {
   .hero { grid-template-columns: 1fr; gap: var(--s-xl); align-content: center; }
   .hero__copy { max-width: 34ch; }
-  .hero__cards { grid-template-columns: 1fr 1fr; }
-  .hcard--facts:hover { transform: rotate(1.2deg); }
+  /* hero stacks here, so the single card runs the full column */
+  .hero__cards { justify-self: stretch; width: auto; max-width: 480px; }
 
   .written { grid-template-columns: 1fr; }
   .written__head { position: static; }
@@ -752,7 +788,7 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
 
   .hero__copy { max-width: none; }
   .hero__h .black { font-size: clamp(2.4rem, 11vw, 3.4rem); max-width: none; }
-  .hero__cards { grid-template-columns: 1fr; }
+  .hero__cards { max-width: none; }
 
   .written, .posture, .principal, .contact { padding-block: var(--s-xl); }
   .lines li { grid-template-columns: 3rem minmax(0, 1fr); gap: var(--s-sm); position: relative; }
@@ -832,6 +868,7 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   /* Cards centre on mobile; running text stays left so it is still readable. */
   .hcard { text-align: center; }
   .hcard--facts dl { justify-items: center; }
+  .slash { justify-content: center; }
   .pillar { text-align: center; }
   .pillar__ico { margin-left: auto; margin-right: auto; }
   .sent { margin-left: auto; margin-right: auto; }
