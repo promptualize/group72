@@ -1,6 +1,6 @@
 /* ==========================================================================
    Group 72 Risk Advisors  ·  styles.css
-   Palette sampled from Group72_BrandGuide.jpg. Poppins per the guide.
+   Palette and type per Group72_Brand_StyleGuide.pdf, 2026 edition.
    Wheat is the ground. Navy is the ink and the two full-bleed bands.
    Gold is linework. Orange is rationed.
    Artwork rule: *_Dark on light grounds, *_Light on dark grounds.
@@ -321,9 +321,9 @@ body.intro-done .intro { transform: translateY(-101%); }
 .hero__bg::after {
   content: ''; position: absolute; inset: 0;
   background:
-    /* pools under the tagline, which is the lowest-contrast element here */
+    /* light pool in the lower left so the buttons sit on a settled ground */
     radial-gradient(66% 56% at 2% 102%,
-      color-mix(in oklch, var(--navy-900) 55%, transparent) 0%, transparent 100%),
+      color-mix(in oklch, var(--navy-900) 30%, transparent) 0%, transparent 100%),
     linear-gradient(100deg,
       color-mix(in oklch, var(--navy-700) 52%, transparent) 0%,
       color-mix(in oklch, var(--navy-700) 44%, transparent) 46%,
@@ -339,21 +339,22 @@ body.intro-done .intro { transform: translateY(-101%); }
   transform: translateY(calc(var(--scroll-progress) * -80px));
 }
 
-/* hero copy reverses out of the photograph */
-.hero__h .thin { color: color-mix(in oklch, var(--wheat) 82%, transparent); }
-.hero__h .black { color: var(--wheat); }
-.hero__lead { color: color-mix(in oklch, var(--wheat) 80%, transparent); }
+/* hero copy reverses out of the photograph. the colours live on the base
+   rules below, not here, so nothing later in the file can repaint them. */
 .hero .btn--navy { background: var(--gold-500); color: #fff; }
 .hero .btn--navy:hover { background: color-mix(in oklch, var(--gold-500), black 12%); }
 .hero .btn--quiet { color: var(--wheat); border-color: color-mix(in oklch, var(--wheat) 42%, transparent); }
 .hero .btn--quiet:hover { border-color: var(--wheat); background: color-mix(in oklch, var(--wheat) 10%, transparent); }
 .hero__copy { position: relative; z-index: 1; }
 .hero__h { margin: var(--s-md) 0; display: grid; }
-.hero__h .thin { font-size: var(--type-h2); font-weight: var(--w-light); line-height: 1.04; color: var(--ink-soft); }
+/* full Wheat, not a tint: at 82% this measured 2.75 over the photograph,
+   under the 3.0 large-text floor. The 300 against 600 weight is what
+   separates this line from the one below it. */
+.hero__h .thin { font-size: var(--type-h2); font-weight: var(--w-light); line-height: 1.04; color: var(--wheat); }
 .hero__h .black {
   font-size: var(--type-display); font-weight: var(--w-semi);
   line-height: var(--lead-tight); letter-spacing: var(--track-mega);
-  padding-bottom: .08em; max-width: 13ch;
+  padding-bottom: .08em; max-width: 13ch; color: var(--wheat);
 }
 
 /* Headline build. The thin line types itself, then the black words land one
@@ -373,19 +374,10 @@ body.intro-done .intro { transform: translateY(-101%); }
   transition: opacity .56s var(--ease-out), transform .66s var(--ease-out);
 }
 .hero__h .black.is-staged .w.is-set { opacity: 1; transform: none; }
-.hero__lead { max-width: var(--measure); font-size: var(--type-lead); font-weight: var(--w-light); line-height: 1.5; color: var(--ink-soft); }
+.hero__lead { max-width: var(--measure); font-size: var(--type-lead); font-weight: var(--w-light); line-height: 1.5; color: color-mix(in oklch, var(--wheat) 86%, transparent); }
 .hero__acts { display: flex; flex-wrap: wrap; gap: var(--s-xs); margin-top: var(--s-lg); }
 /* Tagline, per guide section 06: SemiBold, +250 tracking, all caps, Orange.
    Orange is reserved for this and for calls to action, nothing else. */
-/* Orange tops out near 4.8:1 on Navy and cannot reach the 4.5 needed for
-   small text once a photograph is under it. Set at large-text size (600
-   weight, 19px+) so the 3.0 threshold applies, which it clears. */
-.hero__tag {
-  margin-top: var(--s-lg);
-  font-size: clamp(1.19rem, 1.1rem + 0.4vw, 1.38rem);
-  font-weight: var(--w-semi); letter-spacing: .25em; text-transform: uppercase;
-  line-height: 1.5; color: var(--orange);
-}
 
 .hero__cards { position: relative; z-index: 1; display: grid; gap: var(--s-sm); }
 .hcard {
@@ -536,18 +528,6 @@ body.intro-done .intro { transform: translateY(-101%); }
   background: var(--wheat); padding: var(--s-md) var(--s-lg) var(--s-lg);
   transition: background var(--dur-mid) var(--ease-out);
 }
-/* the foundation card spans both columns, so it reads as a row: mark on
-   the left, name and line beside it, rather than a wide card half empty. */
-.pillar--wide {
-  grid-column: 1 / -1;
-  display: grid; grid-template-columns: auto minmax(0, 1fr);
-  grid-template-areas: 'ico name' 'ico copy';
-  align-content: center; column-gap: var(--s-lg);
-  padding-block: var(--s-lg);
-}
-.pillar--wide .pillar__ico { grid-area: ico; align-self: center; margin-bottom: 0; width: 84px; }
-.pillar--wide .pillar__i   { grid-area: name; align-self: end; }
-.pillar--wide p            { grid-area: copy; align-self: start; max-width: 72ch; }
 .pillar:hover { background: var(--paper); }
 .pillar__ico { width: 96px; height: auto; margin-bottom: var(--s-sm); }
 .pillar__i {
@@ -636,7 +616,10 @@ body.intro-done .intro { transform: translateY(-101%); }
 .foot__grid { display: grid; grid-template-columns: 1.6fr 1fr 1.1fr; gap: var(--s-lg); padding-top: var(--s-lg); border-top: 1px solid var(--rule); }
 /* icon mark, with the line set beside it rather than under the lockup */
 .foot__brand { display: flex; align-items: center; gap: var(--s-sm); }
-.foot__tag { font-size: var(--type-micro); font-weight: var(--w-semi); letter-spacing: .25em; text-transform: uppercase; line-height: 1.7; color: var(--orange); }
+/* Navy, not Orange: the guide sets the tagline in Orange, but Orange on
+   Wheat measures 2.57:1 and fails at any size. Navy on Wheat is an
+   approved pairing (guide 05) and measures 12.31:1. */
+.foot__tag { font-size: var(--type-micro); font-weight: var(--w-semi); letter-spacing: .25em; text-transform: uppercase; line-height: 1.7; color: var(--ink); }
 .foot__col { display: grid; gap: 9px; align-content: start; }
 .foot__col h4 { margin-bottom: 3px; font-size: var(--type-micro); font-weight: var(--w-mid); letter-spacing: var(--track-wider); text-transform: uppercase; color: var(--ink-faint); }
 .foot__col a, .foot__col p { font-size: var(--type-sm); color: var(--ink-soft); }
@@ -742,19 +725,24 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   .foot__grid { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 700px) {
+/* The nav collapses to the burger well before the layout breakpoint.
+   Measured: the lockup, four links and the CTA stop fitting on one row
+   around 860px, where the bar grows from 80px to 102px and wraps. */
+@media (max-width: 860px) {
   .nav__links, .nav__cta { display: none; }
   .burger { display: block; }
+}
 
-  .hero { min-height: auto; padding-top: calc(var(--s-2xl) + 36px); padding-bottom: var(--s-xl); }
-
-  /* the portrait crop of a landscape frame puts the sunrise directly behind
-     the headline, so the overlay carries more weight here than on desktop.
-     measured: wheat headline 2.42 before this, 4.78 after. */
+/* Any narrow viewport crops this landscape frame tall, which puts the
+   sunrise directly behind the headline, so the overlay carries more
+   weight than on desktop. This has to cover tablets, not just phones:
+   measured at 768 wide, "Insurance for" was 2.61 under the desktop
+   overlay and is 4.06 under this one. */
+@media (max-width: 900px) {
   .hero__bg::after {
     background:
       radial-gradient(95% 46% at 2% 102%,
-        color-mix(in oklch, var(--navy-900) 50%, transparent) 0%, transparent 100%),
+        color-mix(in oklch, var(--navy-900) 30%, transparent) 0%, transparent 100%),
       linear-gradient(100deg,
         color-mix(in oklch, var(--navy-700) 66%, transparent) 0%,
         color-mix(in oklch, var(--navy-700) 62%, transparent) 46%,
@@ -763,6 +751,12 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
         color-mix(in oklch, var(--navy-700) 54%, transparent) 0%,
         transparent 24%);
   }
+}
+
+@media (max-width: 700px) {
+
+  .hero { min-height: auto; padding-top: calc(var(--s-2xl) + 36px); padding-bottom: var(--s-xl); }
+
   .hero__copy { max-width: none; }
   .hero__h .black { font-size: clamp(2.4rem, 11vw, 3.4rem); max-width: none; }
   .hero__cards { grid-template-columns: 1fr; }
@@ -881,12 +875,6 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
     transition: border-color var(--dur-fast);
   }
   .pillars .pillar { border: 1px solid var(--rule-strong); }
-  /* in the carousel every card is the same shape, so the foundation card
-     drops its row layout and stacks like the rest. */
-  .pillars .pillar--wide {
-    grid-column: auto; display: block; padding-block: var(--s-lg);
-  }
-  .pillars .pillar--wide .pillar__ico { width: 92px; margin-bottom: var(--s-sm); }
   .pillar.is-active { border-color: var(--rule-gold); }
 
   /* cards sit off-screen horizontally, so the scroll-reveal would never
