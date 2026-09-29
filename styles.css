@@ -349,6 +349,73 @@ body.intro-done .intro { transform: translateY(-101%); }
 .hero .btn--quiet { color: var(--wheat); border-color: color-mix(in oklch, var(--wheat) 42%, transparent); }
 .hero .btn--quiet:hover { border-color: var(--wheat); background: color-mix(in oklch, var(--wheat) 10%, transparent); }
 .hero__copy { position: relative; z-index: 1; max-width: 46ch; }
+/* ══ SCORECARD BAND ════════════════════════════════════════════════════════
+   Sits directly under the hero on the Wheat ground. The whole card is the
+   anchor, so every hover cue fires from one target: the card lifts, a Tan
+   rule draws across the top, the border warms, and a highlight sweeps the
+   0-to-100 bar. */
+.score { padding: var(--s-2xl) var(--gutter) var(--s-xl); }
+.score__card {
+  position: relative; overflow: hidden; display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s-xl); align-items: center;
+  padding: var(--s-xl); background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(14,36,69,.04);
+  transition: transform var(--dur-mid) var(--ease-out),
+              border-color var(--dur-mid), box-shadow var(--dur-mid);
+}
+.score__card::before {
+  content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 100%;
+  background: var(--gold-500);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .7s var(--ease-out);
+}
+.score__card:hover {
+  transform: translateY(-6px); border-color: var(--rule-gold);
+  box-shadow: 0 2px 4px rgba(14,36,69,.05), 0 30px 60px -28px rgba(14,36,69,.36);
+}
+.score__card:hover::before { transform: scaleX(1); }
+
+.score__h {
+  font-size: var(--type-h2); font-weight: var(--w-semi);
+  letter-spacing: var(--track-mega); color: var(--ink);
+}
+.score__p {
+  margin-top: var(--s-xs); max-width: 60ch;
+  font-size: var(--type-body); font-weight: var(--w-light);
+  line-height: 1.55; color: var(--ink-soft);
+}
+
+.score__scale { display: block; margin-top: var(--s-md); max-width: 460px; }
+.score__bar {
+  position: relative; overflow: hidden; display: block;
+  height: 5px; border-radius: 3px;
+  background: linear-gradient(90deg,
+    color-mix(in oklch, var(--orange) 72%, transparent),
+    var(--gold-500) 60%, var(--navy-700));
+}
+.score__bar::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent,
+              color-mix(in oklch, var(--paper) 78%, transparent), transparent);
+  transform: translateX(-102%);
+}
+.score__card:hover .score__bar::after { animation: sweep .9s var(--ease-out); }
+@keyframes sweep { to { transform: translateX(102%); } }
+
+.score__ends { display: flex; justify-content: space-between; margin-top: 8px; }
+.score__ends i {
+  font-style: normal; font-size: var(--type-micro); font-weight: var(--w-semi);
+  letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-faint);
+}
+
+.score__act { display: grid; justify-items: start; gap: var(--s-sm); max-width: 260px; }
+.score__fine {
+  font-size: var(--type-micro); font-weight: var(--w-light);
+  line-height: 1.5; color: var(--ink-faint);
+}
+
 .hero__h { margin: var(--s-md) 0; display: grid; }
 /* full Wheat, not a tint: at 82% this measured 2.75 over the photograph,
    under the 3.0 large-text floor. The 300 against 600 weight is what
@@ -639,8 +706,11 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
 /* ══ RESPONSIVE ════════════════════════════════════════════════════════════ */
 
 @media (max-width: 1080px) {
+  /* hero stacks, so the card runs the column rather than hugging right */
   .hero { grid-template-columns: 1fr; gap: var(--s-xl); align-content: center; }
-  .hero__copy { max-width: 34ch; }
+  .hero__copy { max-width: 46ch; }
+  .score__card { grid-template-columns: 1fr; gap: var(--s-lg); }
+  .score__act { max-width: none; justify-items: stretch; }
 
   .written { grid-template-columns: 1fr; }
   .written__head { position: static; }
@@ -688,6 +758,9 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   .hero { min-height: auto; padding-top: calc(var(--s-2xl) + 36px); padding-bottom: var(--s-xl); }
 
   .hero__copy { max-width: none; }
+  .score { padding: var(--s-xl) var(--gutter); }
+  .score__card { padding: var(--s-lg) var(--s-md); }
+  .score__act .btn { width: 100%; justify-content: center; }
   .hero__h .black { font-size: clamp(2.4rem, 11vw, 3.4rem); max-width: none; }
 
   .written, .posture, .principal, .contact { padding-block: var(--s-xl); }
