@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Group 72 Risk Advisors  ·  scorecard.css
+   Modal for the Insurance Risk Scorecard. Inherits the tokens declared in
+   styles.css, which must load first.
+   ========================================================================== */
+
+body.sc-open { overflow: hidden; }
+
+.sc { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; }
+.sc[hidden] { display: none; }
+
+.sc__backdrop {
+  position: absolute; inset: 0;
+  background: color-mix(in oklch, var(--navy-900) 74%, transparent);
+  backdrop-filter: blur(3px);
+  animation: scFade .28s var(--ease-out);
+}
+@keyframes scFade { from { opacity: 0; } }
+
+.sc__panel {
+  position: relative; z-index: 1;
+  width: min(640px, calc(100vw - 2 * var(--s-md)));
+  max-height: min(880px, calc(100vh - 2 * var(--s-md)));
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid var(--rule-strong); border-radius: 3px;
+  box-shadow: 0 40px 90px -30px rgba(14, 36, 69, .55);
+  animation: scRise .38s var(--ease-out);
+}
+@keyframes scRise { from { opacity: 0; transform: translateY(16px); } }
+
+.sc__head {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--s-md);
+  padding: var(--s-lg) var(--s-lg) var(--s-sm);
+  background: var(--paper);
+}
+.sc__eyebrow {
+  font-size: var(--type-micro); font-weight: var(--w-semi);
+  letter-spacing: var(--track-wider); text-transform: uppercase; color: var(--gold-700);
+}
+.sc__title {
+  margin-top: 4px; font-size: var(--type-h3); font-weight: var(--w-semi);
+  letter-spacing: 0; color: var(--ink);
+}
+.sc__close {
+  flex: none; width: 44px; height: 44px; margin: -8px -8px 0 0;
+  display: grid; place-items: center;
+  background: none; border: 0; border-radius: 2px; cursor: pointer;
+  color: var(--ink-faint); transition: color var(--dur-fast), background var(--dur-fast);
+}
+.sc__close:hover { color: var(--ink); background: color-mix(in oklch, var(--navy-700) 6%, transparent); }
+.sc__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+
+.sc__progress { height: 2px; margin: 0 var(--s-lg); background: var(--rule); overflow: hidden; }
+.sc__progress > span {
+  display: block; height: 100%; background: var(--gold-500);
+  transform: scaleX(.25); transform-origin: left;
+  transition: transform .5s var(--ease-out);
+}
+
+.sc__form { padding: var(--s-lg); }
+.sc__step { display: none; }
+.sc__step.is-on { display: grid; gap: var(--s-sm); animation: scStep .34s var(--ease-out); }
+@keyframes scStep { from { opacity: 0; transform: translateY(8px); } }
+
+.sc__stepnote {
+  font-size: var(--type-micro); font-weight: var(--w-semi);
+  letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-faint);
+}
+.sc__note { font-size: var(--type-sm); font-weight: var(--w-light); color: var(--ink-soft); }
+
+/* fields */
+.sf { display: grid; gap: 6px; }
+.sf[hidden] { display: none; }
+.sf > span {
+  font-size: var(--type-sm); font-weight: var(--w-mid); color: var(--ink);
+}
+.sf input, .sf select {
+  width: 100%; padding: 12px 13px; min-height: 46px;
+  font-size: 16px;                    /* 16px keeps iOS from zooming on focus */
+  font-weight: var(--w-light); color: var(--ink);
+  background: #fff; border: 1px solid var(--rule-strong); border-radius: 2px;
+  transition: border-color var(--dur-fast);
+}
+.sf input:focus, .sf select:focus { outline: 0; border-color: var(--gold-500); }
+.sf.is-invalid input, .sf.is-invalid select { border-color: var(--orange); }
+.sf__help {
+  font-style: normal; font-size: var(--type-micro); font-weight: var(--w-light);
+  line-height: 1.45; color: var(--ink-faint);
+}
+.sf__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-sm); }
+
+/* attestation and disclaimer */
+.sc__check {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--s-xs);
+  align-items: start; padding: var(--s-sm);
+  border: 1px solid var(--rule); border-radius: 2px;
+  font-size: var(--type-sm); font-weight: var(--w-light);
+  line-height: 1.5; color: var(--ink-soft);
+  transition: border-color var(--dur-fast);
+}
+.sc__check.is-invalid { border-color: var(--orange); }
+.sc__check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--gold-500); }
+
+.sc__status { margin-top: var(--s-sm); font-size: var(--type-sm); color: var(--ink-soft); }
+.sc__status.is-error { color: var(--orange); }
+
+.sc__foot {
+  display: flex; gap: var(--s-2xs); margin-top: var(--s-lg);
+  padding-top: var(--s-sm); border-top: 1px solid var(--rule);
+}
+.sc__foot .btn[hidden] { display: none; }
+.sc__foot #scNext, .sc__foot #scSubmit { margin-left: auto; }
+
+.sc__done { padding: var(--s-2xl) var(--s-lg); text-align: center; display: grid; gap: var(--s-sm); justify-items: center; }
+.sc__done h3 { font-size: var(--type-h3); font-weight: var(--w-semi); letter-spacing: 0; color: var(--ink); }
+.sc__done p { max-width: 42ch; font-size: var(--type-sm); font-weight: var(--w-light); line-height: 1.55; color: var(--ink-soft); }
+
+@media (max-width: 560px) {
+  .sc__panel { max-height: 100vh; width: 100vw; border-radius: 0; border: 0; }
+  .sc__head, .sc__form { padding-left: var(--s-md); padding-right: var(--s-md); }
+  .sc__progress { margin: 0 var(--s-md); }
+  .sf__row { grid-template-columns: 1fr; }
+  .sc__foot { flex-wrap: wrap; }
+  .sc__foot .btn { flex: 1 1 auto; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc__backdrop, .sc__panel, .sc__step.is-on { animation: none; }
+}

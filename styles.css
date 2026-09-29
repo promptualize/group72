@@ -106,9 +106,10 @@ ol, ul { list-style: none; padding: 0; }
 /* ── Brand lockup (real artwork, typeset fallback) ─────────────────────── */
 
 .brand { display: inline-block; }
-.brand > img { width: clamp(176px, 17vw, 212px); height: auto; }
+/* monogram, 1.79:1. sized by height so the bar keeps its rhythm. */
+.brand > img { height: clamp(38px, 3.4vw, 46px); width: auto; }
 
-.brand--foot > img { width: auto; height: 62px; }
+.brand--foot > img { width: auto; height: 52px; }
 .brand__fallback { display: none; gap: 2px; line-height: 1; }
 .brand__fallback b {
   font-weight: var(--w-light); font-size: 1.1rem; letter-spacing: .15em;
@@ -808,7 +809,7 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
     padding-top: var(--s-md);
   }
   .foot__brand { grid-column: 1 / -1; }
-  .brand--foot > img { width: auto; height: 50px; }
+  .brand--foot > img { width: auto; height: 42px; }
   .foot__grid > .foot__col:last-child { grid-column: 1 / -1; }
   .foot__brand { gap: var(--s-xs); }
   .foot__legal { flex-direction: column; margin-top: var(--s-lg); padding-top: var(--s-sm); }
@@ -816,8 +817,7 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   .foot__legal .site-by { margin-left: 0; margin-top: var(--s-sm); }
 
   /* nav lockup was 176px on a 375px screen, crowding the burger */
-  /* guide section 04 sets a 150px floor on the primary logo */
-  .brand:not(.brand--foot) > img { width: 152px; }
+  .brand:not(.brand--foot) > img { height: 36px; }
 
   /* the two hero buttons were sizing to their labels, so they came out
      348px and 282px side by side. full width reads deliberate. */
