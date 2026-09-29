@@ -114,6 +114,9 @@ body.sc-open { overflow: hidden; }
 .sc__foot .btn[hidden] { display: none; }
 .sc__foot #scNext, .sc__foot #scSubmit { margin-left: auto; }
 
+/* the display below beats the UA [hidden] rule, so guard it explicitly or
+   the confirmation sits under the form from the moment the modal opens. */
+.sc__done[hidden] { display: none; }
 .sc__done { padding: var(--s-2xl) var(--s-lg); text-align: center; display: grid; gap: var(--s-sm); justify-items: center; }
 .sc__done h3 { font-size: var(--type-h3); font-weight: var(--w-semi); letter-spacing: 0; color: var(--ink); }
 .sc__done p { max-width: 42ch; font-size: var(--type-sm); font-weight: var(--w-light); line-height: 1.55; color: var(--ink-soft); }
