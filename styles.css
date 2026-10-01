@@ -266,6 +266,16 @@ body.intro-done .intro { transform: translateY(-101%); }
   background: var(--gold-500); color: #fff;
 }
 .nav:not(.is-stuck) .btn--navy:hover { background: color-mix(in oklch, var(--gold-500), black 12%); }
+
+/* Menu open: the panel behind the bar is Wheat, so the nav drops its
+   over-the-photo reversal whatever the scroll position. Without this the
+   cream lockup, cream burger and gold CTA all sit on cream and vanish.
+   Same specificity as the rules above, so it has to come after them. */
+body.nav-open .nav .brand__dark { display: block; }
+body.nav-open .nav .brand__light { display: none; }
+body.nav-open .nav .burger span { background: var(--ink); }
+body.nav-open .nav .btn--navy { background: var(--navy-700); color: var(--wheat); }
+body.nav-open .nav .btn--navy:hover { background: var(--navy-600); }
 .nav__links { display: flex; gap: var(--s-md); margin-left: auto; }
 .nav__links a {
   position: relative; padding: 6px 0;
@@ -756,7 +766,8 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   .burger { display: block; }
   .nav { gap: var(--s-sm); }
   .nav .brand { margin-right: auto; }
-  .nav__cta { padding: 11px 18px; min-height: 44px; font-size: var(--type-micro); }
+  .nav__cta { padding: 11px 16px; min-height: 44px; font-size: var(--type-micro);
+              white-space: nowrap; }   /* was wrapping to "Contact / Us" */
   .nav__cta svg { display: none; }
 }
 
