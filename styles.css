@@ -282,7 +282,8 @@ body.intro-done .intro { transform: translateY(-101%); }
 .nav__links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
 .burger {
-  display: none; position: relative; width: 44px; height: 44px;
+  display: none; order: -1; margin-right: var(--s-2xs);
+  position: relative; width: 44px; height: 44px;
   background: none; border: 0; padding: 0; cursor: pointer;
 }
 .burger span {
@@ -616,7 +617,8 @@ body.intro-done .intro { transform: translateY(-101%); }
 /* ══ FOOTER ════════════════════════════════════════════════════════════════ */
 
 .foot { background: var(--wheat); color: var(--ink); padding: var(--s-xl) var(--gutter) var(--s-md); overflow: hidden; }
-.foot__grid { display: grid; grid-template-columns: 1.6fr 1fr 1.1fr; gap: var(--s-lg); padding-top: var(--s-lg); border-top: 1px solid var(--rule); }
+/* two columns since the verse block came out */
+.foot__grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--s-lg); padding-top: var(--s-lg); border-top: 1px solid var(--rule); }
 /* icon mark, with the line set beside it rather than under the lockup */
 .foot__brand { display: flex; align-items: center; gap: var(--s-sm); }
 /* Navy, not Orange: the guide sets the tagline in Orange, but Orange on
@@ -627,8 +629,6 @@ body.intro-done .intro { transform: translateY(-101%); }
 .foot__col h4 { margin-bottom: 3px; font-size: var(--type-micro); font-weight: var(--w-mid); letter-spacing: var(--track-wider); text-transform: uppercase; color: var(--ink-faint); }
 .foot__col a, .foot__col p { font-size: var(--type-sm); color: var(--ink-soft); }
 .foot__col a:hover { color: var(--gold-700); }
-.foot__verse { font-size: var(--type-body) !important; font-weight: var(--w-light); line-height: 1.4; color: var(--ink) !important; }
-.foot__cite { margin-top: 6px; font-size: var(--type-micro) !important; letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--gold-700) !important; }
 .foot__legal { margin-top: var(--s-lg); padding-top: var(--s-sm); border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2xs); }
 .foot__legal p { font-size: var(--type-micro); color: var(--ink-faint); }
 
@@ -722,15 +722,21 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
 
   .principal { grid-template-columns: 1fr; gap: var(--s-xl); }
   .principal__portrait { max-width: 400px; }
-  .foot__grid { grid-template-columns: 1fr 1fr; }
+
 }
 
 /* The nav collapses to the burger well before the layout breakpoint.
    Measured: the lockup, four links and the CTA stop fitting on one row
    around 860px, where the bar grows from 80px to 102px and wraps. */
 @media (max-width: 860px) {
-  .nav__links, .nav__cta { display: none; }
+  /* burger takes the left slot, lockup centres, CTA holds the right and
+     stays put on scroll. only the link list is dropped. */
+  .nav__links { display: none; }
   .burger { display: block; }
+  .nav { gap: var(--s-sm); }
+  .nav .brand { margin-right: auto; }
+  .nav__cta { padding: 11px 18px; min-height: 44px; font-size: var(--type-micro); }
+  .nav__cta svg { display: none; }
 }
 
 /* Any narrow viewport crops this landscape frame tall, which puts the
@@ -803,13 +809,11 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
      Stacked at full desktop spacing this ran ~860px tall on a 375px screen. */
   .foot { padding: var(--s-xl) var(--gutter) var(--s-md); }
   .foot__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-md) var(--s-lg);
+    grid-template-columns: 1fr;
+    gap: var(--s-md);
     padding-top: var(--s-md);
   }
-  .foot__brand { grid-column: 1 / -1; }
   .brand--foot > img { width: auto; height: 50px; }
-  .foot__grid > .foot__col:last-child { grid-column: 1 / -1; }
   .foot__brand { gap: var(--s-xs); }
   .foot__legal { flex-direction: column; margin-top: var(--s-lg); padding-top: var(--s-sm); }
   .foot__legal { flex-direction: column; align-items: flex-start; }

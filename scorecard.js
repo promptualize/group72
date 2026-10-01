@@ -163,6 +163,7 @@
     /* Safety, 20 */
     var safety = 0;
     safety += ({ '12-plus': 10, '4-11': 7, '1-3': 3, 'none': 0 })[a.safetyMeetings] || 0;
+    // "I'm unsure" scores the same as No: only a confirmed Yes earns points.
     if (a.writtenSafetyProgram === 'yes') safety += 5;
     if (a.returnToWork === 'yes') safety += 5;
     out.categories.safety = safety;
@@ -191,9 +192,6 @@
     if (a.businessType === 'other' || a.trade === 'other') {
       out.flags.push('Business type or trade is "Other". Assign a tier and recalculate industry points.');
     }
-    if (a.singleLargeClaim === 'yes') {
-      out.flags.push('One claim drove more than half of total losses. Consider capping it and explaining the adjustment.');
-    }
     if (ratio !== null && ratio > 0.70 && claims <= 1) {
       out.flags.push('Loss ratio over 70% on ' + claims + ' claim(s). Likely a single large loss. Confirm before presenting.');
     }
@@ -206,6 +204,12 @@
     if (a.businessType === 'contractor' &&
         (a.subcontracted === '51-75' || a.subcontracted === '76-100')) {
       out.flags.push('Subcontracts more than 50% of work. Review contractual risk transfer on the call.');
+    }
+    var unsure = ['writtenSafetyProgram', 'returnToWork', 'driverPolicy']
+      .filter(function (k) { return a[k] === 'unsure'; });
+    if (unsure.length) {
+      out.flags.push('Answered "I am unsure" on ' + unsure.length +
+        ' safety or fleet question(s), scored as No. Worth confirming, the points may be there.');
     }
     return out;
   }

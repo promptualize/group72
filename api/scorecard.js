@@ -35,7 +35,6 @@ const LABELS = {
   premiumBand: 'Avg annual premium (5 yr)',
   lossBand: 'Total incurred losses (5 yr)',
   claims: 'Claims filed (5 yr)',
-  singleLargeClaim: 'One claim over half of losses',
   safetyMeetings: 'Safety meetings per year',
   writtenSafetyProgram: 'Written safety program',
   returnToWork: 'Return-to-work program',
