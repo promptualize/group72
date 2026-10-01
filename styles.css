@@ -740,7 +740,9 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   .field__body { grid-column: 2; }
 
   .principal { grid-template-columns: 1fr; gap: var(--s-xl); }
-  .principal__portrait { max-width: 400px; }
+  /* cap the photo, not the figure: auto margins on a grid item cancel
+     stretch and collapse it to shrink-to-fit (it rendered at 50px). */
+  .portrait { max-width: 520px; margin-inline: auto; }
 
 }
 
@@ -855,7 +857,6 @@ body.intro-done [data-load="5"] { transition-delay: 520ms; }
   .pillar { text-align: center; }
   .pillar__ico { margin-left: auto; margin-right: auto; }
   .sent { margin-left: auto; margin-right: auto; }
-  .principal__portrait { margin-left: auto; margin-right: auto; }
   .field { justify-items: center; text-align: center; }
   .field__body, .field__lead { text-align: left; }
 }
