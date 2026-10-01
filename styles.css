@@ -561,11 +561,30 @@ body.intro-done .intro { transform: translateY(-101%); }
   gap: var(--s-2xl); align-items: center;
 }
 .principal__portrait { position: relative; margin: 0; }
-/* no forced ratio and no cover: the photo renders at its own proportions,
-   so whatever is supplied is what shows, uncropped. */
+/* Two photographs crossfading in one frame. Both files are pre-cropped to
+   4:5, so the box is fixed by aspect-ratio and nothing reflows on swap. */
 .portrait {
-  width: 100%; height: auto;
-  border-radius: 2px;
+  position: relative; width: 100%; aspect-ratio: 4 / 5;
+  border-radius: 2px; overflow: hidden;
+}
+.portrait img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .9s var(--ease-in-out);
+}
+.portrait img.is-on { opacity: 1; }
+
+/* dots sit under the frame and double as manual controls */
+.portrait-dots { display: flex; gap: 2px; margin-top: var(--s-xs); }
+.portrait-dots button {
+  width: 24px; height: 24px; padding: 8px; border: 0; cursor: pointer;
+  background: var(--rule-strong); background-clip: content-box;
+  border-radius: 50%; transition: background var(--dur-fast);
+}
+.portrait-dots button[aria-selected="true"] { background: var(--gold-500); background-clip: content-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait img { transition: none; }
 }
 .principal__copy { display: grid; gap: var(--s-sm); max-width: 54ch; }
 .principal__copy .h2 { padding-bottom: .06em; }

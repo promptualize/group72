@@ -347,6 +347,58 @@
     });
   }
 
+  /* ── 5a. Jace portrait ─────────────────────────────────────────────────
+     Two photographs crossfading. Pauses off-screen and on hover, stops for
+     good once the visitor picks a frame, and holds still under reduced
+     motion. Dots are real buttons so it is operable without a mouse. */
+
+  (function () {
+    var frame = document.getElementById('jacePortrait');
+    if (!frame) return;
+
+    var shots = [].slice.call(frame.querySelectorAll('img'));
+    if (shots.length < 2) return;
+
+    var dots = document.createElement('div');
+    dots.className = 'portrait-dots';
+    dots.setAttribute('role', 'tablist');
+    dots.setAttribute('aria-label', 'Photographs of Jace');
+    frame.parentNode.appendChild(dots);
+
+    var i = 0, timer = null, taken = false;
+
+    shots.forEach(function (img, n) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', img.alt || 'Photo ' + (n + 1));
+      b.addEventListener('click', function () { taken = true; stop(); show(n); });
+      dots.appendChild(b);
+    });
+    var tabs = [].slice.call(dots.children);
+
+    function show(n) {
+      i = n;
+      shots.forEach(function (s, k) { s.classList.toggle('is-on', k === n); });
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', String(k === n)); });
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() {
+      if (timer || taken || reduce) return;
+      timer = setInterval(function () { show((i + 1) % shots.length); }, 5200);
+    }
+
+    frame.addEventListener('mouseenter', stop);
+    frame.addEventListener('mouseleave', start);
+
+    show(0);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+      }, { threshold: 0.25 }).observe(frame);
+    } else { start(); }
+  })();
+
   /* ── 6. Housekeeping ───────────────────────────────────────────────────── */
 
   var yr = document.getElementById('yr');
