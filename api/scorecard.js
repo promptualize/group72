@@ -55,13 +55,17 @@ module.exports = async function handler(req, res) {
 
   const {
     RESEND_API_KEY,
-    SCORECARD_TO,
-    SCORECARD_FROM = 'Group 72 Scorecard <onboarding@resend.dev>',
-    SCORECARD_CC
+    MAIL_TO, SCORECARD_TO,          // MAIL_TO is shared with /api/lead
+    MAIL_FROM, SCORECARD_FROM,
+    MAIL_CC, SCORECARD_CC
   } = process.env;
 
-  if (!RESEND_API_KEY || !SCORECARD_TO) {
-    console.error('scorecard: missing RESEND_API_KEY or SCORECARD_TO');
+  const to   = MAIL_TO || SCORECARD_TO;
+  const from = SCORECARD_FROM || MAIL_FROM || 'Group 72 Scorecard <onboarding@resend.dev>';
+  const cc   = SCORECARD_CC || MAIL_CC;
+
+  if (!RESEND_API_KEY || !to) {
+    console.error('scorecard: missing RESEND_API_KEY or MAIL_TO');
     return res.status(500).json({ error: 'Mail is not configured' });
   }
 
@@ -145,13 +149,13 @@ module.exports = async function handler(req, res) {
   </div>`;
 
   const payload = {
-    from: SCORECARD_FROM,
-    to: SCORECARD_TO.split(',').map((s) => s.trim()).filter(Boolean),
+    from,
+    to: to.split(',').map((s) => s.trim()).filter(Boolean),
     reply_to: answers.email,
     subject: `Scorecard: ${answers.businessName}, ${result.score}/100 ${result.grade}`,
     html
   };
-  if (SCORECARD_CC) payload.cc = SCORECARD_CC.split(',').map((s) => s.trim()).filter(Boolean);
+  if (cc) payload.cc = cc.split(',').map((s) => s.trim()).filter(Boolean);
 
   try {
     const r = await fetch('https://api.resend.com/emails', {

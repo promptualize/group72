@@ -334,7 +334,7 @@
           status.textContent = 'Got it. Jace will be in touch within one business day.';
         })
         .catch(function () {
-          status.textContent = 'The form endpoint is not live yet. Email jace@group72ins.com directly.';
+          status.textContent = 'That did not send. Email jace@group72ins.com and we will pick it up from there.';
           status.classList.add('is-error');
         });
     });
@@ -385,7 +385,7 @@
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function start() {
       if (timer || taken || reduce) return;
-      timer = setInterval(function () { show((i + 1) % shots.length); }, 5200);
+      timer = setInterval(function () { show((i + 1) % shots.length); }, 2000);
     }
 
     frame.addEventListener('mouseenter', stop);

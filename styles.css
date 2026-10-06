@@ -580,7 +580,7 @@ body.nav-open .nav .btn--navy:hover { background: var(--navy-600); }
 .portrait img {
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover;
-  opacity: 0; transition: opacity .9s var(--ease-in-out);
+  opacity: 0; transition: opacity .45s var(--ease-in-out);
 }
 .portrait img.is-on { opacity: 1; }
 
@@ -640,6 +640,7 @@ body.nav-open .nav .btn--navy:hover { background: var(--navy-600); }
   background: color-mix(in oklch, var(--navy-800) 80%, transparent); outline: none;
 }
 .ff.is-invalid input, .ff.is-invalid select { border-color: var(--orange); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form__status { min-height: 1.3em; margin-top: var(--s-2xs); font-size: var(--type-sm); color: var(--gold-300); }
 .form__status.is-error { color: var(--orange); }
 

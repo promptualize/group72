@@ -321,6 +321,11 @@
       <label class="ff"><span>Phone</span><input type="tel" name="phone" autocomplete="tel"></label>
     </div>
 
+    <!-- honeypot: offscreen, not hidden, so bots fill it and humans never see it -->
+    <div class="hp" aria-hidden="true">
+      <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    </div>
+
     <label class="ff">
       <span>Anything We Should Know</span>
       <textarea name="message" rows="4"></textarea>
