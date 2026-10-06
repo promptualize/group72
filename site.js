@@ -385,7 +385,7 @@
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function start() {
       if (timer || taken || reduce) return;
-      timer = setInterval(function () { show((i + 1) % shots.length); }, 2000);
+      timer = setInterval(function () { show((i + 1) % shots.length); }, 3000);
     }
 
     frame.addEventListener('mouseenter', stop);
